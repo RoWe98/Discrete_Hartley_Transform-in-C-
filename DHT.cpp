@@ -5,7 +5,27 @@
 const int N = 1024;
 const float PI = 3.1416;
 
-inline void swap(float &a, float &b)
+class DHT{
+public:
+	DHT(void); //构造函数
+	~DHT(void);//析构函数
+	inline void swap(float &a,float &b); //交换数据
+	void bitrp(float xreal[], float ximag[], int n); //位反置转换
+	void FFT(float xreal[], float ximag[], int n);   //快速傅立叶转换
+	void FFT_test();     //测试数据
+};
+
+DHT::DHT(void)
+{
+	return;
+}
+
+DHT::~DHT(void)
+{
+	return;
+}
+
+inline void DHT::swap(float &a, float &b)
 {
 	float t;
 	t = a;
@@ -13,7 +33,7 @@ inline void swap(float &a, float &b)
 	b = t;
 }
 
-void bitrp(float xreal[], float ximag[], int n)
+void DHT::bitrp(float xreal[], float ximag[], int n)
 {
 	// 位反转置换 Bit-reversal Permutation
 	int i, j, a, b, p;
@@ -39,7 +59,7 @@ void bitrp(float xreal[], float ximag[], int n)
 	}
 }
 
-void FFT(float xreal[], float ximag[], int n)
+void DHT::FFT(float xreal[], float ximag[], int n)
 {
 	// 快速傅立叶变换，将复数 x 变换后仍保存在 x 中，xreal, ximag 分别是 x 的实部和虚部
 	float wreal[N / 2], wimag[N / 2], treal, timag, ureal, uimag, arg;
@@ -83,7 +103,7 @@ void FFT(float xreal[], float ximag[], int n)
 
 
 
-void FFT_test()
+void DHT::FFT_test()
 {
 	float xreal[N] = {}, ximag[N] = {};
 
@@ -127,6 +147,7 @@ void FFT_test()
 
 int main()
 {
-	FFT_test();
+	DHT dht;
+	dht.FFT_test();
 	return 0;
 }
